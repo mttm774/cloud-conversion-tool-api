@@ -4,12 +4,13 @@ from flask_cors import CORS
 from flask import Flask, request, json
 from flask_middleware_jwt import Middleware
 from flask_jwt_extended import JWTManager
+
 from .utils.json_custom_encoder import JSONCustomEncoder
 from .dataContext.sqlAlchemyContext import db
 import requests
 from flaskr import create_app
 from config import Config
-from .views import HealthCheckView, LogInView, SignUpView, TokenVerifyView
+from .views import HealthCheckView, LogInView, SignUpView, TokenVerifyView,ConversionView
 
 config = Config()
 
@@ -32,5 +33,6 @@ api.add_resource(HealthCheckView, '/health')
 api.add_resource(LogInView, '/auth/login')
 api.add_resource(SignUpView, '/auth/signup')
 api.add_resource(TokenVerifyView, '/token/verify')
+api.add_resource(ConversionView, '/api/tasks')
 
 jwt = JWTManager(app)
