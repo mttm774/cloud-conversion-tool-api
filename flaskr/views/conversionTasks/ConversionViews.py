@@ -8,12 +8,14 @@ from  config import Config
 from ...dataContext import db
 from ...producer.queueProducer import task_posted
 from ...models.conversion import Conversion,VideoFormats
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 
 
 config = Config()
 
 
 class ConversionView(Resource):
+    @jwt_required()
     def post(self):
         file = request.files['fileName']
         json_data=request.form.get('data')
